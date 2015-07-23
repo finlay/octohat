@@ -19,15 +19,15 @@ Library
   Build-depends:
       aeson                == 0.8.*
     , base                 >= 4.4 && < 4.9
-    , base-compat          == 0.6.*
+    , base-compat          >= 0.6
     , base16-bytestring    == 0.1.1.*
     , base64-bytestring    == 1.0.*
     , bytestring           >= 0.9
     , containers           >= 0.4
     , cryptohash           == 0.11.*
     , dotenv               == 0.1.*
-    , either               == 4.3.*
-    , errors               == 1.4.*
+    , either               >= 4.3
+    , errors               >= 1.4
     , ghc-prim             >= 0.2
     , http-client          == 0.4.*
     , http-types           == 0.8.*
@@ -77,9 +77,9 @@ test-suite spec
   hs-source-dirs  :   spec
   main-is         :   Spec.hs
   build-depends   :   base               >= 4.4 && <4.9
-                    , base-compat        == 0.6.*
+                    , base-compat        >= 0.6
                     , hspec              == 2.1.*
-                    , hspec-expectations == 0.6.*
+                    , hspec-expectations >= 0.6
                     , text
                     , dotenv             == 0.1.*
                     , transformers       >= 0.3 && < 0.5
