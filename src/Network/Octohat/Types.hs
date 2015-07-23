@@ -24,10 +24,9 @@ module Network.Octohat.Types ( Member(..)
                              , runGitHub
                              , runGitHub'
                              , GitHub) where
-import Control.Applicative
 import Control.Monad.Reader (ReaderT(..))
 import Control.Monad.State (StateT(..), evalStateT)
-import Control.Monad.Trans.Either
+import Control.Monad.Trans.Except
 import Data.Aeson
 import Data.Aeson.TH
 import Data.Char (toLower)
@@ -218,12 +217,12 @@ defPagination = Pagination 30 1 (Links Nothing Nothing Nothing Nothing) True
 
 -- | The monad transformer where all operations run. Supports initial configuration
 --   through a Reader monad and the possibility of failure through Either
-type GitHub = EitherT GitHubReturnStatus (ReaderT BearerToken (StateT Pagination IO))
+type GitHub = ExceptT GitHubReturnStatus (ReaderT BearerToken (StateT Pagination IO))
 
 -- | Executes a computation built within the GitHub monad returning an Either within
 --   the IO data type using the provided token
 runGitHub' :: GitHub a -> BearerToken -> IO (Either GitHubReturnStatus a)
-runGitHub' comp token = evalStateT (runReaderT (runEitherT comp) token) defPagination
+runGitHub' comp token = evalStateT (runReaderT (runExceptT comp) token) defPagination
 
 -- | Executes a computation built within the GitHub monad returning an Either within
 --   the IO data type. Reads an API token from an environment variable named GITHUB_TOKEN
