@@ -36,6 +36,7 @@ Library
     , text                 == 1.2.*
     , time                 >= 1.4 && < 1.6
     , transformers         >= 0.3 && < 0.5
+    , transformers-compat  >= 0.3 && < 0.5
     , unordered-containers == 0.2.*
     , wreq-sb              == 0.4.*
     , xmlhtml              == 0.2.*
